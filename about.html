@@ -121,6 +121,22 @@
       margin-bottom: 8px;
     }
 
+    /* ===== Ссылка «← на главную» над карточкой ===== */
+    .home-link {
+      margin-bottom: 16px;
+      padding: 8px 18px;
+      border-radius: 999px;            /* полностью круглые края */
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .home-link:hover {
+      background: rgba(255, 255, 255, 0.35);
+    }
+
     /* ===== ქვედა ზოლი ===== */
     footer {
       margin-top: 24px;
@@ -136,6 +152,9 @@
   </style>
 </head>
 <body>
+
+  <!-- Ссылка обратно на главную страницу -->
+  <a class="home-link" href="index.html">← მთავარი</a>
 
   <main class="card">
     <!-- შეცვალე: შენი სახელისა და გვარის პირველი ასოები -->

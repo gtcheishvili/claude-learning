@@ -12,9 +12,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project status
 
-This repository is currently empty (no source code, build config, or git history yet). Update this file once a language, framework, and tooling are chosen — add build/lint/test commands (including how to run a single test) and a short overview of the architecture.
+Learning project with static HTML pages (index.html, about.html, calculator.html) — no build tools. Open a page in the browser and press F5 to see changes.
 
 ## Environment
 
 - Platform: Windows 10 (`D:\claude-learning`). Both PowerShell and Git Bash are available.
-- Not yet a git repository.
+- Git repository (branch `master`). Commit after every working change.

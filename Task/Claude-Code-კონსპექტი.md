@@ -73,6 +73,10 @@ claude
 | git log --oneline -5 | ტერმინალი | მხოლოდ ბოლო 5 commit-ი, თითო ერთ ხაზზე |
 | Ctrl+F5 | ბრაუზერი | „მკაცრი“ განახლება: გვერდი თავიდან იტვირთება, ბრაუზერის მეხსიერების გარეშე |
 | F12 → Application → Local Storage | ბრაუზერი | localStorage-ში შენახული მონაცემების ნახვა (Firefox-ში: Storage) |
+| F12 / Ctrl+Shift+I | ბრაუზერი | DevTools-ის გახსნა (Elements, Console, Application) |
+| Ctrl+Shift+M | ბრაუზერი (DevTools ღიაა) | ტელეფონის ხედი: გვერდი პატარა ეკრანზე როგორ ჩანს |
+| ↑ | ბრაუზერი (Console) | წინა ბრძანების დაბრუნება |
+| Tab | ბრაუზერი (Console) | სიტყვის დასრულება (მაგ. localSt → localStorage) |
 
 ## დღე 1 — 10–11 ნოემბერი: დაყენება და პირველი სამი პროექტი
 
@@ -248,6 +252,29 @@ todo.html-ში საქმეებს ვამატებ, ვნიშნ
 - git commit-მა თქვა „nothing to commit“: Claude Code-მა ყოველი ცვლილების შემდეგ commit უკვე გააკეთა (CLAUDE.md-ის წესით). Git ცარიელ commit-ს არ ქმნის.
 - „Your branch is up to date with 'origin/main'“: კომპიუტერზე და GitHub-ზე ერთი და იგივეა, push საჭირო არ არის.
 
+### გაკვეთილი 7: DevTools, Console და ჩუმი ბაგი
+
+todo.html-ში ჩუმი ბაგი ვიპოვე და გავასწორე, ახლა კი ასეთი შეცდომა Console-ში წითლად გამოჩნდება.
+
+- F12 (ან Ctrl+Shift+I) ხსნის DevTools-ს. Elements: გვერდის HTML; Console: შეცდომები და ბრძანებები; Application → Local Storage: შენახული მონაცემები.
+- Ctrl+Shift+M: ტელეფონის ხედი DevTools-ში.
+- localStorage-ის ჩანაწერი ხელით შეიძლება შეიცვალოს ან წაიშალოს, ამიტომ საიდუმლოს იქ არ ვინახავთ.
+- Console-ში ბრძანება ხელით იკრიფება (ჩასმას Chrome ბლოკავს), მერე Enter ღილაკი. ↑ წინა ბრძანებას აბრუნებს, Tab სიტყვას ასრულებს, Esc შეთავაზებებს ხურავს.
+- JavaScript დიდ/პატარა ასოებს არჩევს: localstorage ≠ localStorage. შეცდომა: ReferenceError: ... is not defined.
+- try/catch: catch შეცდომას „ყლაპავს“ → ჩუმი ბაგი: Console სუფთაა, F5-ის შემდეგ სია ცარიელია, ახალი საქმე კი ძველებს თავზე გადააწერს. გამოსავალი: catch-ში console.error(e).
+- Console-ის წითელი შეცდომა შეიძლება Chrome-ის გაფართოებისაც იყოს: მარჯვნივ ფაილის სახელი შეამოწმე.
+- კოდი (ფაილი, Git იცავს) და მონაცემები (localStorage) ცალ-ცალკე ინახება.
+- ბაგი Claude Code-ს შაბლონით აღვუწერე და ვთხოვე „ჯერ ნუ შეცვლი ფაილებს“: 9 წამში იპოვა ხაზი 253. გასწორება: git restore todo.html.
+
+| ტერმინი / კოდი | რას ნიშნავს |
+| --- | --- |
+| DevTools | ბრაუზერის დეველოპერის ხელსაწყოები (F12) |
+| Console | DevTools-ის ჩანართი: შეცდომები და JavaScript ბრძანებები |
+| ReferenceError: ... is not defined | ასეთი სახელი არ არსებობს (ხშირად ასოს შეცდომაა) |
+| try { ... } catch (e) { ... } | სცადე კოდი; შეცდომისას catch-ის ნაწილი სრულდება |
+| console.error(e) | შეცდომას Console-ში წითლად აჩვენებს |
+| ჩუმი ბაგი | შეცდომა, რომელიც არსად ჩანს, მაგრამ პროგრამა არასწორად მუშაობს |
+
 სავარჯიშოები:
 
 - [x] Git-ის შემოწმება და სახელის/ელფოსტის დაყენება
@@ -265,7 +292,11 @@ todo.html-ში საქმეებს ვამატებ, ვნიშნ
 - [x] index.html გადაკეთდა მთავარ გვერდად ბარათებით
 - [x] ბმული „← მთავარი“ სამ გვერდზე
 - [x] git push თვითონ, ! ბრძანებით, და შემოწმება git status-ით
-- [ ] localStorage-ის ნახვა: F12 → Application → Local Storage → todos
+- [x] localStorage-ის ნახვა: F12 → Application → Local Storage → todos
+- [x] Console-ში localStorage.getItem("todos")
+- [x] ბაგის შექმნა და აღწერა შაბლონით (ჯერ ფაილების შეცვლის გარეშე)
+- [x] git diff-ით ბაგის პოვნა და git restore todo.html
+- [x] console.error(e) catch-ში, commit და git push
 
 ## ოქროს წესები და პრობლემების გადაჭრა
 

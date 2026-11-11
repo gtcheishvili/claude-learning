@@ -17,4 +17,5 @@ Learning project with static HTML pages (index.html, about.html, calculator.html
 ## Environment
 
 - Platform: Windows 10 (`D:\claude-learning`). Both PowerShell and Git Bash are available.
-- Git repository (branch `master`). Commit after every working change.
+- Git repository (branch `main`). Commit after every working change.
+- Uploaded to GitHub: remote `origin` → https://github.com/gtcheishvili/claude-learning (public).

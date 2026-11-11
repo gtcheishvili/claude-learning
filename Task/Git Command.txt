@@ -1,0 +1,9 @@
+გაკვეთილი 4 დასრულებულია ✅
+ისწავლე	
+git init	repository-ს შექმნა
+git add . → git commit -m	ვერსიის შენახვა
+git status	რა შეიცვალა (commit-მდე ყოველთვის!)
+git diff	ზუსტად რა ხაზები შეიცვალა
+git log --oneline	ისტორია
+git restore	გადარჩენა 💥→✅
+!	ბრძანება ლიმიტის ხარჯვის გარეშე

@@ -1,59 +1,169 @@
 <!DOCTYPE html>
 <html lang="ka">
 <head>
-  <!-- UTF-8 საჭიროა, რომ ქართული ასოები სწორად გამოჩნდეს -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>გამარჯობა</title>
+  <title>გიორგი ჭეიშვილი — მთავარი</title>
 
-  <!-- CSS: აქ ვწერთ, როგორ გამოიყურებოდეს გვერდი -->
+  <!-- Грузинский шрифт из Google Fonts (как в about.html) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;600;800&display=swap" rel="stylesheet">
+
   <style>
-    body {
-      font-family: sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;      /* ჰორიზონტალურად ცენტრში */
-      justify-content: center;  /* ვერტიკალურად ცენტრში */
-      height: 100vh;
-      margin: 0;
-      background-color: #f5f5f5;
+    /* ===== Цвета: меняешь здесь — меняется на всей странице ===== */
+    :root {
+      --gradient-start: #7b5cff;  /* фиолетовый */
+      --gradient-end:   #2ea8ff;  /* голубой */
+      --card-bg:        #ffffff;  /* фон карточки */
+      --text:           #24213a;  /* основной текст */
+      --text-soft:      #6b6880;  /* бледный текст */
+      --link-bg:        #f3f1ff;  /* фон карточки-ссылки */
     }
 
-    button {
-      font-size: 20px;
-      padding: 12px 28px;
-      border: none;
-      border-radius: 8px;
+    /* ===== Вся страница ===== */
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Noto Sans Georgian", sans-serif;
+      color: var(--text);
+      background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 16px;
+    }
+
+    /* ===== Белая карточка по центру ===== */
+    .card {
+      background: var(--card-bg);
+      width: 100%;
+      max-width: 720px;
+      border-radius: 24px;
+      padding: 48px 32px;
+      box-shadow: 0 20px 60px rgba(20, 10, 60, 0.25);
+      text-align: center;
+    }
+
+    /* ===== Кружок с инициалами ===== */
+    .avatar {
+      width: 110px;
+      height: 110px;
+      margin: 0 auto 20px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
       color: white;
-      background-color: blue;   /* ღილაკის საწყისი ფერი */
-      cursor: pointer;
+      font-size: 40px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 24px rgba(123, 92, 255, 0.4);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 2.2rem;
+      font-weight: 800;
+    }
+
+    .subtitle {
+      margin: 8px 0 40px;
+      color: var(--text-soft);
+      font-size: 1.05rem;
+    }
+
+    /* ===== Сетка карточек-ссылок ===== */
+    .links {
+      display: grid;
+      /* столько колонок, сколько влезает (каждая не уже 180px) */
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+    }
+
+    /* Одна карточка — это целиком ссылка <a> */
+    .link-card {
+      display: block;
+      background: var(--link-bg);
+      border-radius: 18px;
+      padding: 28px 16px;
+      color: var(--text);
+      text-decoration: none;   /* убираем подчёркивание ссылки */
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    /* При наведении мышки карточка приподнимается */
+    .link-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 24px rgba(123, 92, 255, 0.25);
+    }
+
+    .link-card .emoji {
+      display: block;
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    .link-card .name {
+      display: block;
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+
+    .link-card .desc {
+      display: block;
+      margin-top: 6px;
+      color: var(--text-soft);
+      font-size: 0.9rem;
+    }
+
+    /* ===== Нижняя строка ===== */
+    footer {
+      margin-top: 24px;
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 0.9rem;
+    }
+
+    /* ===== Маленький экран (телефон) ===== */
+    @media (max-width: 480px) {
+      .card { padding: 36px 20px; }
+      h1 { font-size: 1.8rem; }
     }
   </style>
 </head>
 <body>
 
-  <!-- HTML: გვერდის შიგთავსი -->
-  <h1>გამარჯობა</h1>
-  <button id="colorButton">დამაჭირე</button>
+  <main class="card">
+    <div class="avatar">გჭ</div>
+    <h1>გამარჯობა!</h1>
+    <p class="subtitle">ეს ჩემი სასწავლო საიტია. აირჩიე გვერდი:</p>
 
-  <!-- JavaScript: ღილაკის დაჭერისას რა მოხდეს -->
-  <script>
-    // ფერების სია, რომლებსაც ღილაკი რიგრიგობით მიიღებს
-    const colors = ["blue", "red", "green", "orange", "purple"];
+    <!-- Карточки-ссылки. Чтобы добавить новую страницу, скопируй один блок <a>...</a> -->
+    <nav class="links">
+      <a class="link-card" href="about.html">
+        <span class="emoji">👤</span>
+        <span class="name">ჩემს შესახებ</span>
+        <span class="desc">ვინ ვარ და რა მიყვარს</span>
+      </a>
 
-    // რომელ ფერზე ვართ ახლა (0 ნიშნავს სიის პირველ ფერს)
-    let currentIndex = 0;
+      <a class="link-card" href="calculator.html">
+        <span class="emoji">🧮</span>
+        <span class="name">კალკულატორი</span>
+        <span class="desc">მარტივი გამოთვლები</span>
+      </a>
 
-    // ვპოულობთ ღილაკს მისი id-ით
-    const button = document.getElementById("colorButton");
+      <a class="link-card" href="todo.html">
+        <span class="emoji">✅</span>
+        <span class="name">ჩემი საქმეები</span>
+        <span class="desc">საქმეების სია</span>
+      </a>
+    </nav>
+  </main>
 
-    // ყოველ დაჭერაზე ეს ფუნქცია გაეშვება
-    button.addEventListener("click", function () {
-      // გადავდივართ შემდეგ ფერზე; სიის ბოლოს ისევ თავიდან ვიწყებთ
-      currentIndex = (currentIndex + 1) % colors.length;
-      button.style.backgroundColor = colors[currentIndex];
-    });
-  </script>
+  <footer>© 2026 გიორგი ჭეიშვილი</footer>
 
 </body>
 </html>

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ჩემი საქმეები</title>
+
+  <!-- Грузинский шрифт из Google Fonts (как в about.html) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* ===== Цвета: меняешь здесь — меняется на всей странице ===== */
+    :root {
+      --gradient-start: #7b5cff;  /* фиолетовый */
+      --gradient-end:   #2ea8ff;  /* голубой */
+      --card-bg:        #ffffff;  /* фон карточки */
+      --text:           #24213a;  /* основной текст */
+      --text-soft:      #6b6880;  /* бледный текст */
+      --item-bg:        #f3f1ff;  /* фон одного дела */
+      --danger:         #ff5c7a;  /* цвет кнопки удаления */
+    }
+
+    /* ===== Вся страница ===== */
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Noto Sans Georgian", sans-serif;
+      color: var(--text);
+      background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 16px;
+    }
+
+    /* ===== Белая карточка по центру ===== */
+    .card {
+      background: var(--card-bg);
+      width: 100%;
+      max-width: 640px;
+      border-radius: 24px;
+      padding: 48px 32px;
+      box-shadow: 0 20px 60px rgba(20, 10, 60, 0.25);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 2.2rem;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    .subtitle {
+      margin: 8px 0 32px;
+      color: var(--text-soft);
+      text-align: center;
+    }
+
+    /* ===== Форма добавления: поле + кнопка ===== */
+    .add-form {
+      display: flex;
+      gap: 10px;
+    }
+
+    .add-form input {
+      flex: 1;                 /* поле занимает всё свободное место */
+      min-width: 0;
+      padding: 14px 16px;
+      font: inherit;
+      border: 2px solid var(--item-bg);
+      border-radius: 14px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .add-form input:focus {
+      border-color: var(--gradient-start);
+    }
+
+    .add-form button {
+      padding: 14px 22px;
+      font: inherit;
+      font-weight: 600;
+      color: white;
+      background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+      border: none;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .add-form button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(123, 92, 255, 0.4);
+    }
+
+    /* ===== Список дел ===== */
+    .todo-list {
+      list-style: none;
+      padding: 0;
+      margin: 24px 0 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .todo-list li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--item-bg);
+      border-radius: 14px;
+      padding: 14px 16px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    /* При наведении мышки дело чуть приподнимается */
+    .todo-list li:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(123, 92, 255, 0.15);
+    }
+
+    /* Галочка */
+    .todo-list input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      accent-color: var(--gradient-start);
+      cursor: pointer;
+    }
+
+    /* Текст дела */
+    .todo-text {
+      flex: 1;
+      word-break: break-word;  /* длинные слова переносятся */
+    }
+
+    /* Выполненное дело: зачёркнуто и бледное */
+    .todo-list li.done .todo-text {
+      text-decoration: line-through;
+      color: var(--text-soft);
+      opacity: 0.7;
+    }
+
+    /* Кнопка удаления */
+    .delete-btn {
+      flex-shrink: 0;
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 8px;
+      transition: background 0.2s;
+    }
+
+    .delete-btn:hover {
+      background: rgba(255, 92, 122, 0.15);
+    }
+
+    /* Надпись, когда дел нет */
+    .empty {
+      text-align: center;
+      color: var(--text-soft);
+      margin: 24px 0 0;
+    }
+
+    /* Счётчик внизу */
+    .counter {
+      text-align: center;
+      color: var(--text-soft);
+      font-size: 0.9rem;
+      margin: 20px 0 0;
+    }
+
+    /* ===== Нижняя строка ===== */
+    footer {
+      margin-top: 24px;
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 0.9rem;
+    }
+
+    /* ===== Маленький экран (телефон) ===== */
+    @media (max-width: 480px) {
+      .card { padding: 36px 20px; }
+      h1 { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <main class="card">
+    <h1>ჩემი საქმეები</h1>
+    <p class="subtitle">დაამატე, მონიშნე და წაშალე საქმეები</p>
+
+    <!-- Форма: поле ввода и кнопка. Enter тоже работает -->
+    <form class="add-form" id="add-form">
+      <input type="text" id="todo-input" placeholder="ახალი საქმე..." autocomplete="off">
+      <button type="submit">დამატება</button>
+    </form>
+
+    <!-- Сюда JavaScript будет вставлять дела -->
+    <ul class="todo-list" id="todo-list"></ul>
+
+    <!-- Показывается, когда список пустой -->
+    <p class="empty" id="empty">საქმეები ჯერ არ არის ✨</p>
+
+    <!-- Счётчик -->
+    <p class="counter" id="counter"></p>
+  </main>
+
+  <footer>© 2026 გიორგი ჭეიშვილი</footer>
+
+  <script>
+    // Ключ, под которым список хранится в localStorage
+    const STORAGE_KEY = "todos";
+
+    // Находим нужные элементы на странице
+    const form    = document.getElementById("add-form");
+    const input   = document.getElementById("todo-input");
+    const list    = document.getElementById("todo-list");
+    const empty   = document.getElementById("empty");
+    const counter = document.getElementById("counter");
+
+    // Загружаем дела из localStorage.
+    // Если там ничего нет (или данные испорчены) — начинаем с пустого массива.
+    function loadTodos() {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);   // читаем текст
+        return saved ? JSON.parse(saved) : [];             // текст → массив
+      } catch (e) {
+        return [];
+      }
+    }
+
+    // Сохраняем массив дел в localStorage (массив → текст)
+    function saveTodos() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
+    }
+
+    // Все дела. Каждое дело — объект: { text: "...", done: true/false }
+    let todos = loadTodos();
+
+    // Рисуем список на экране заново
+    function render() {
+      list.innerHTML = "";   // очищаем старый список
+
+      todos.forEach(function (todo, index) {
+        const li = document.createElement("li");
+        if (todo.done) li.classList.add("done");
+
+        // Галочка: при нажатии меняем done на противоположное
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.checked = todo.done;
+        checkbox.addEventListener("change", function () {
+          todos[index].done = checkbox.checked;
+          saveTodos();
+          render();
+        });
+
+        // Текст дела (textContent — безопасно, HTML не выполняется)
+        const text = document.createElement("span");
+        text.className = "todo-text";
+        text.textContent = todo.text;
+
+        // Кнопка удаления: убираем дело из массива
+        const del = document.createElement("button");
+        del.className = "delete-btn";
+        del.textContent = "🗑";
+        del.title = "წაშლა";
+        del.addEventListener("click", function () {
+          todos.splice(index, 1);   // удалить 1 элемент на позиции index
+          saveTodos();
+          render();
+        });
+
+        li.append(checkbox, text, del);
+        list.appendChild(li);
+      });
+
+      // Показываем надпись «пусто», только если дел нет
+      empty.style.display = todos.length === 0 ? "block" : "none";
+
+      // Считаем невыполненные дела
+      const left = todos.filter(function (t) { return !t.done; }).length;
+      counter.textContent = todos.length > 0
+        ? "დარჩა " + left + " საქმე " + todos.length + "-დან"
+        : "";
+    }
+
+    // Добавление нового дела
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();          // не даём странице перезагрузиться
+      const value = input.value.trim(); // убираем пробелы по краям
+      if (value === "") return;        // пустое дело не добавляем
+
+      todos.push({ text: value, done: false });
+      saveTodos();
+      render();
+
+      input.value = "";   // очищаем поле
+      input.focus();      // курсор снова в поле
+    });
+
+    // Первый показ списка при открытии страницы
+    render();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- შეცვალე: ბრაუზერის ჩანართზე გამოჩენილი სათაური -->
+  <title>გიორგი ჭეიშვილი — ჩემს შესახებ</title>
+
+  <!-- ქართული შრიფტი Google Fonts-დან -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* ===== ფერები: აქ შეცვლი და მთელ გვერდზე შეიცვლება ===== */
+    :root {
+      --gradient-start: #7b5cff;  /* იისფერი */
+      --gradient-end:   #2ea8ff;  /* ლურჯი */
+      --card-bg:        #ffffff;  /* ბარათის ფონი */
+      --text:           #24213a;  /* მთავარი ტექსტი */
+      --text-soft:      #6b6880;  /* მკრთალი ტექსტი */
+      --hobby-bg:       #f3f1ff;  /* ჰობის ბარათის ფონი */
+    }
+
+    /* ===== მთელი გვერდი ===== */
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Noto Sans Georgian", sans-serif;
+      color: var(--text);
+      /* ფონი, რომელშიც ფერები ერთმანეთში გადადის */
+      background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 16px;
+    }
+
+    /* ===== თეთრი ბარათი ცენტრში ===== */
+    .card {
+      background: var(--card-bg);
+      width: 100%;
+      max-width: 640px;
+      border-radius: 24px;
+      padding: 48px 32px;
+      box-shadow: 0 20px 60px rgba(20, 10, 60, 0.25);
+      text-align: center;
+    }
+
+    /* ===== წრე ინიციალებით ===== */
+    .avatar {
+      width: 110px;
+      height: 110px;
+      margin: 0 auto 20px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+      color: white;
+      font-size: 40px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 24px rgba(123, 92, 255, 0.4);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 2.2rem;
+      font-weight: 800;
+    }
+
+    .subtitle {
+      margin: 8px 0 0;
+      color: var(--text-soft);
+      font-size: 1.05rem;
+    }
+
+    /* ===== სექციების სათაურები ===== */
+    h2 {
+      margin: 40px 0 16px;
+      font-size: 1.3rem;
+      font-weight: 600;
+    }
+
+    .about-text {
+      color: var(--text-soft);
+      line-height: 1.8;
+      margin: 0;
+    }
+
+    /* ===== ჰობების ბარათები ===== */
+    .hobbies {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 14px;
+    }
+
+    .hobbies li {
+      background: var(--hobby-bg);
+      border-radius: 16px;
+      padding: 20px 12px;
+      font-weight: 600;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    /* მაუსის მიტანისას ბარათი ოდნავ აიწევს */
+    .hobbies li:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 20px rgba(123, 92, 255, 0.2);
+    }
+
+    .hobbies .emoji {
+      display: block;
+      font-size: 2rem;
+      margin-bottom: 8px;
+    }
+
+    /* ===== ქვედა ზოლი ===== */
+    footer {
+      margin-top: 24px;
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 0.9rem;
+    }
+
+    /* ===== პატარა ეკრანი (მობილური) ===== */
+    @media (max-width: 480px) {
+      .card { padding: 36px 20px; }
+      h1 { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <main class="card">
+    <!-- შეცვალე: შენი სახელისა და გვარის პირველი ასოები -->
+    <div class="avatar">გჭ</div>
+
+    <!-- შეცვალე: შენი სახელი -->
+    <h1>გიორგი ჭეიშვილი</h1>
+
+    <!-- შეცვალე: მოკლე წარწერა, ვინ ხარ -->
+    <p class="subtitle">სტუდენტი · პროგრამირების დამწყები</p>
+
+    <h2>ჩემს შესახებ</h2>
+    <!-- შეცვალე: 2-4 წინადადება შენზე -->
+    <p class="about-text">
+      გამარჯობა! მე ვარ ცნობისმოყვარე ადამიანი, რომელიც ახლა სწავლობს ვებგვერდების შექმნას.
+      მიყვარს ახალი რამის აღმოჩენა და იდეების რეალობად ქცევა.
+      ეს ჩემი პირველი საკუთარი გვერდია.
+    </p>
+
+    <h2>ჩემი ჰობები</h2>
+    <!-- შეცვალე: ჰობები. ახალი ჰობის დასამატებლად დააკოპირე ერთი <li>...</li> ხაზი -->
+    <ul class="hobbies">
+      <li><span class="emoji">⚽</span>ფეხბურთი</li>
+      <li><span class="emoji">🎵</span>მუსიკა</li>
+      <li><span class="emoji">📚</span>კითხვა</li>
+    </ul>
+  </main>
+
+  <!-- შეცვალე: შენი სახელი და წელი -->
+  <footer>© 2026 გიორგი ჭეიშვილი</footer>
+
+</body>
+</html>

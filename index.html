@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+  <!-- UTF-8 საჭიროა, რომ ქართული ასოები სწორად გამოჩნდეს -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>გამარჯობა</title>
+
+  <!-- CSS: აქ ვწერთ, როგორ გამოიყურებოდეს გვერდი -->
+  <style>
+    body {
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;      /* ჰორიზონტალურად ცენტრში */
+      justify-content: center;  /* ვერტიკალურად ცენტრში */
+      height: 100vh;
+      margin: 0;
+      background-color: #f5f5f5;
+    }
+
+    button {
+      font-size: 20px;
+      padding: 12px 28px;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      background-color: blue;   /* ღილაკის საწყისი ფერი */
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HTML: გვერდის შიგთავსი -->
+  <h1>გამარჯობა</h1>
+  <button id="colorButton">დამაჭირე</button>
+
+  <!-- JavaScript: ღილაკის დაჭერისას რა მოხდეს -->
+  <script>
+    // ფერების სია, რომლებსაც ღილაკი რიგრიგობით მიიღებს
+    const colors = ["blue", "red", "green", "orange", "purple"];
+
+    // რომელ ფერზე ვართ ახლა (0 ნიშნავს სიის პირველ ფერს)
+    let currentIndex = 0;
+
+    // ვპოულობთ ღილაკს მისი id-ით
+    const button = document.getElementById("colorButton");
+
+    // ყოველ დაჭერაზე ეს ფუნქცია გაეშვება
+    button.addEventListener("click", function () {
+      // გადავდივართ შემდეგ ფერზე; სიის ბოლოს ისევ თავიდან ვიწყებთ
+      currentIndex = (currentIndex + 1) % colors.length;
+      button.style.backgroundColor = colors[currentIndex];
+    });
+  </script>
+
+</body>
+</html>
